@@ -1,13 +1,13 @@
 async function init() {
   //get data
-  let hotel = await fetch(`${process.env.host}/map/api/gethotel`).then((res) =>
-    res.json()
-  );
+  let hotel = await fetch(
+    "https://holiday-beta.vercel.app/map/api/gethotel"
+  ).then((res) => res.json());
   let destination = await fetch(
-    `${process.env.host}/map/api/getdestination`
+    "https://holiday-beta.vercel.app/map/api/getdestination"
   ).then((res) => res.json());
   let eating_spot = await fetch(
-    `${process.env.host}/map/api/geteatingspot`
+    "https://holiday-beta.vercel.app/map/api/geteatingspot"
   ).then((res) => res.json());
   //create maker
   hotel = getMaker(hotel, "/img/hotel.png", [25, 25]);
@@ -76,7 +76,7 @@ async function init() {
         markerTemp.on("click", function (e) {
           sidebar.hide();
           sidebar.setContent(`<div style="width:100%;margin-top:10%;">
-                        <iFrame style="border:none;" src="${process.env.host}/map/api/infomation?id=${marker.options.data._id}" width="100%" height="700px" allowfullscreen></iFrame>
+                        <iFrame style="border:none;" src="https://holiday-beta.vercel.app/map/api/infomation?id=${marker.options.data._id}" width="100%" height="700px" allowfullscreen></iFrame>
                         </div>`);
           sidebar.show();
 
