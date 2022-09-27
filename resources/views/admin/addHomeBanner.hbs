@@ -1,0 +1,22 @@
+{{> header account=user.status id=user.userid name=user.username admin=user.admin}}
+<div class="header-space"></div>
+<div style="width:100%; display:flex; justify-content:center; margin-top:3%">
+    <div style="width:40%;">
+        <form action="/quantri/addHomeBanner/" method="post" class="addHomeBanner_Form">
+            <h2 style="color:darkorange">Thêm Banner</h2>
+            <p>Name:</p>
+            <input name="name" placeholder="Nhập tên banner..."/>
+            <p>Description_down:</p>
+            <input name="description_down" placeholder="Chú thích..."/>
+            <p>Description_up:</p>
+            <input name="description_up" placeholder="Chú thích..."/>
+            <p>ID:</p>
+            <input name="id" placeholder="id..."/>
+            <p>Thumb_url:</p>
+            <input name="thumb_url" placeholder="ID ảnh..."/>
+            <button type="submit">Thêm</button>
+        </form>
+    </div>
+
+</div>
+{{> footer}}

@@ -1,0 +1,71 @@
+{{> header account=user.status id=user.userid name=user.username admin=user.admin}}
+<div class="header-space"></div>
+<div style="width:100%; display:flex; justify-content:center; margin-top:3%">
+    <div style="width:40%;">
+        <form action="/quantri/updateTour/{{tourData._id}}" method="post" class="addDestination_Form">
+            <h2 style="color:darkorange">Cập nhật tour du lịch</h2>
+            <p>Name:</p>
+            <input value="{{tourData.name}}" name="name" placeholder="Nhập tên địa điểm..."/>
+            <p>Description:</p>
+            <textarea style="width:60%" rows="4" name="description" placeholder="Chú thích...">{{tourData.description}}</textarea>
+            <p>Price:</p>
+            <input value="{{tourData.price}}" name="price" placeholder="Giá vé..."/>
+            <p>Nơi khởi hành:</p>
+            <input value="{{tourData.startlocation.location}}" name="location" placeholder="Nơi khởi hành..."/>
+            <p>Số ngày:</p>
+            <input value="{{tourData.startlocation.days}}" name="day" placeholder="Số ngày..."/>
+            <p>Thumb_url:</p>
+            <input value="{{tourData.thumb_url}}" name="thumb_url" placeholder="ID ảnh..."/>
+            <h3 style="color:darkorange; margin-top:2%; margin-bottom:2%">Thêm hình ảnh</h3>
+            <div id="addImage_container">
+                {{#each tourData.images}}
+                <div style="display: flex;">
+                    <input name="images" placeholder="ID ảnh..." class="ImageInput" style="margin-top: 1%;" value="{{this.thumb_url}}"/>
+                    <p class="removeImageInput" style="color: red; font-size:12px; margin:auto">X</p>
+                </div>
+                {{/each}}
+            </div>
+            <p style="color:darkorange; font-style:italic" id="addImage">Thêm ảnh</p>
+            <button type="submit">Cập nhật</button>
+        </form>
+    </div>
+
+</div>
+<script>
+    const removeImageInput=document.querySelectorAll('.removeImageInput')
+    const ImageInput=document.querySelectorAll('.ImageInput')
+    for(let i=0; i<removeImageInput.length; i++){
+        removeImageInput[i].onclick=function(e){
+            ImageInput[i].remove()
+            e.target.remove()
+        }
+
+    }
+
+    const addImage=document.getElementById('addImage')
+
+    addImage.onclick = function(e){
+        const div=document.createElement('div')
+        div.style.display='flex'
+        const input= document.createElement('input')
+        input.name='images'
+        input.placeholder='ID ảnh...'
+        input.style.marginTop='1%'
+        input.classList.add('ImageInput')
+        div.appendChild(input)
+        const p=document.createElement('p')
+        const textNode=document.createTextNode('X')
+        p.appendChild(textNode)
+        p.style.color='red'
+        p.style.fontSize='12px'
+        p.style.margin='auto'
+        p.classList.add('removeImageInput')
+        div.appendChild(p)
+        document.getElementById('addImage_container').appendChild(div)
+        p.onclick = function(){
+            p.remove()
+            input.remove()
+        }
+    }
+</script>
+{{> footer}}

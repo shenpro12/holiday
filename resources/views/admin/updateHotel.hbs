@@ -1,0 +1,105 @@
+{{> header account=user.status id=user.userid name=user.username admin=user.admin}}
+<div class="header-space"></div>
+<div style="width:100%; display:flex; justify-content:center; margin-top:3%">
+    <div style="width:80%;">
+        <form action="/quantri/updateHotel/{{hotelData._id}}" method="post" class="addDestination_Form" id="addDestination_Form">
+            <h2 style="color:darkorange">Cập nhật khách sạn</h2>
+            <p>Name:</p>
+            <input name="name" placeholder="Nhập tên khách sạn..." value="{{hotelData.name}}"/>
+            <p>Location:</p>
+            <input name="location" placeholder="Địa chỉ..." value="{{hotelData.location}}"/>
+            <p>Description:</p>
+            <textarea style="width:60%;" rows="4" name="description" placeholder="Chú thích...">{{hotelData.description}}</textarea>
+            <p>Lat:</p>
+            <input name="lat" placeholder="Vĩ độ..." value="{{hotelData.lat}}"/>
+            <p>Long:</p>
+            <input name="long" placeholder="Kinh độ..." value="{{hotelData.long}}"/>
+            <p>Thumb_url:</p>
+            <input name="thumb_url" placeholder="ID ảnh..." value="{{hotelData.thumb_url}}"/>
+            <p>Type:</p>
+            <input name="type" placeholder="Lại hình..." value="{{hotelData.type}}"/>
+            <h3 style="color:darkorange; margin-top:2%; margin-bottom:2%">Thêm hình ảnh</h3>
+            <div id="addImage_container">
+                {{#each hotelData.images}}
+                <div style="display: flex;">
+                    <input name="images" placeholder="ID ảnh..." class="ImageInput" style="margin-top: 1%;" value="{{this.thumb_url}}"/>
+                    <p class="removeImageInput" style="color: red; font-size:12px; margin:auto">X</p>
+                </div>
+                {{/each}}
+            </div>
+            <p style="color:darkorange; font-style:italic" id="addImage">Thêm ảnh</p>
+            <h3 style="color:darkorange; margin-top:2%; margin-bottom:2%">Service</h3>
+            <div id="addService_container">
+                <div style="display: flex;"><input type="checkbox" name="service" value="Cho thuê xe máy"/><p>Cho thuê xe máy</p></div>
+                <div style="display: flex;"><input type="checkbox" name="service" value="Bãi đỗ xe" /><p>Bãi đỗ xe</p></div>
+                <div style="display: flex;"><input type="checkbox" name="service" value="Lò nướng" /><p>Lò nướng</p></div>
+                <div style="display: flex;"><input type="checkbox" name="service" value="Dọn phòng hằng ngày" /><p>Dọn phòng hằng ngày</p></div>
+                <div style="display: flex;"><input type="checkbox" name="service" value="Giữ hành lý" /><p>Giữ hành lý</p></div>
+                <div style="display: flex;"><input type="checkbox" name="service" value="Hồ bơi" /><p>Hồ bơi</p></div>
+                <div style="display: flex;"><input type="checkbox" name="service" value="Internet"/><p>Internet</p></div>
+                <div style="display: flex;"><input type="checkbox" name="service" value="Khu vui chơi" /><p>Khu vui chơi</p></div>
+                <div style="display: flex;"><input type="checkbox" name="service" value="Quán cafe" /><p>Quán cafe</p></div>
+                <div style="display: flex;"><input type="checkbox" name="service" value="Sân vườn" /><p>Sân vườn</p></div>
+            </div>
+            <button type="submit">Cập nhật</button>
+        </form>
+    </div>
+
+</div>
+<script>
+    const removeImageInput=document.querySelectorAll('.removeImageInput')
+    const ImageInput=document.querySelectorAll('.ImageInput')
+    for(let i=0; i<removeImageInput.length; i++){
+        removeImageInput[i].onclick=function(e){
+            ImageInput[i].remove()
+            e.target.remove()
+        }
+
+    }
+
+    const addImage=document.getElementById('addImage')
+
+    addImage.onclick = function(e){
+        const div=document.createElement('div')
+        div.style.display='flex'
+        const input= document.createElement('input')
+        input.name='images'
+        input.placeholder='ID ảnh...'
+        input.style.marginTop='1%'
+        input.classList.add('ImageInput')
+        div.appendChild(input)
+        const p=document.createElement('p')
+        const textNode=document.createTextNode('X')
+        p.appendChild(textNode)
+        p.style.color='red'
+        p.style.fontSize='12px'
+        p.style.margin='auto'
+        p.classList.add('removeImageInput')
+        div.appendChild(p)
+        document.getElementById('addImage_container').appendChild(div)
+        p.onclick = function(){
+            p.remove()
+            input.remove()
+        }
+    }
+    //
+    async function getService(){
+        fetch('http://localhost:3000/quantri/updateHotel/api/service/{{hotelData._id}}' )
+        .then(res=>{
+            return res.json()
+        })
+        .then(resData=>{
+            let input = document.querySelectorAll('input[type="checkbox"]')
+            for(let i=0; i<input.length; i++){
+                for(let j=0; j<resData.length; j++){
+                    if(input[i].value==resData[j].name){
+                        input[i].checked="true"
+                    }
+                }
+            }
+        })
+        .catch()
+    }
+    getService()
+</script>
+{{> footer}}

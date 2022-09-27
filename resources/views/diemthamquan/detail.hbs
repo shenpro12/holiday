@@ -1,0 +1,149 @@
+{{> header account=user.status id=user.userid name=user.username admin=user.admin}}
+
+<div class="Detail-container">
+
+<div class="header-space"></div>
+
+<p class="route"><a href="/#diemden">Điểm đến</a> / <a href="/diemden/{{destination.name}}?id={{destination._id}}">{{destination.name}}</a></p>
+
+<div class="grid wide container">
+    <div class="row">
+        <div class="col l-6 m-6 c-12">
+            <img class="detail-img" src="http://drive.google.com/uc?export=view&id={{destination.thumb_url}}" alt="">
+        </div>
+        <div class="col l-6 m-6 c-12 text-left">
+            <div style="margin: 1% 3%;">
+                <h2>{{destination.name}}</h2>
+                <div class="is-divider"></div>
+                <h2 class="price" id="price"></h2>
+                <p class="description">{{destination.description}}</p>
+                <p><b>Địa chỉ:</b> {{destination.location}}</p>
+                <p><b>Giá vé(tham khảo):</b> {{destination.price}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="products-tab-container">
+    <div class="products-tab">
+
+        <ul>
+            <li id="products-tab-item" class="products-tab-item products-tab-item-active">ĐÁNH GIÁ{{totalComment}}</li>
+           <li id="products-tab-item" class="products-tab-item">MÔ TẢ</li>
+           <li id="products-tab-item" class="products-tab-item">HÌNH ẢNH</li>
+        </ul> 
+
+        <div class="products-tab-content">
+            <div class="products-tab-content-item products-tab-content-rate product-content-active">
+                {{#if user}}
+                <div style="text-align:left ; width:100%; display:flex; margin-bottom: 1%; margin-top:1%; margin-left: 2%;">
+                    <div style="text-align:center; background-color:rgb(63, 152, 152); width:40px; height:40px; border-radius:100%; overflow:hidden">
+                        <p class="user-textName" style="line-height:40px; margin:0px; text-transform: uppercase; color:white; font-size:30px; font-weight:bold">{{user.username}}</p>
+                    </div>
+                    <form style="width: 80%" method="post" action="/comment/{{destination._id}}">
+                        <textarea  style="margin-left: 2%; width:100%; padding:5px" name="Comment" placeholder="Viết đánh giá" ></textarea>
+                        <button class="send_comment" type="submit">Gửi</button>
+                    </form>
+                </div>
+                {{else}}
+                <div style="text-align:left ; width:100%; display:flex; margin-bottom: 1%; margin-top:1%; margin-left: 2%;">
+                    <div style="width:80%; margin-left:2%">
+                    <p style="color:darkorange; margin-top:1%; font-size:16px; word-wrap: break-word">Bạn chưa đăng nhập! Hãy <a style="color:orangered" href="/taikhoan/dangnhap">đăng nhập</a> để viết đánh giá!</p>
+                    </div>
+                </div>
+                {{/if}}
+                {{#each commentsData}}
+                <div class="comment-container">
+                    
+                    <div style="text-align:center; background-color:rgb(67, 239, 90); width:40px; height:40px; border-radius:100%">
+                        <p class="user-textName" style="line-height:40px; margin:0px; text-transform: uppercase; color:white; font-size:30px; font-weight:bold">{{this.username}}</p>
+                        <div class="rep-comment-btn">Trả lời</div>
+                    </div>
+                    <div style="width:80%; margin-left:2%; border-bottom:1px solid rgb(116, 109, 109)">
+                       <p style="font-weight: bold; margin:0px; font-size:16px;word-wrap: break-word; margin-top:1%">{{this.username}}</p>
+                       <p class="comment-time">{{this.time}}</p>
+                       <a href="/comment/{{this.id}}/report" class="report-comment-btn"><p style="margin:0px; font-style:italic; font-size:12px; color:red">Báo vi phạm</p></a>
+                       {{#if this.selft}}
+                       <a href="/comment/{{this.id}}/delete" class="delete-comment-btn"><p style="margin:0px; font-style:italic; font-size:12px; color:red">Xóa</p></a>
+                       {{/if}}
+                       <p style="margin-top:1%; font-size:16px; word-wrap: break-word">{{this.content}}</p>
+                       <form class="rep-form" method="post" action="/comment/{{this.id}}">
+                           <textarea name="rep_comment" style="margin-bottom:0%; width:90%; padding:5px; margin-left:5%" placeholder="Viết trả lời"></textarea>
+                           <button type="submit" style="font-size:10px; width: 70px;height:30px; margin-top:1%">Gửi</button>
+                       </form>
+
+                       {{#each this.rep_comments}}
+                       <div class="comment-container">
+                           <div style="text-align:center; background-color:rgb(67, 239, 90); width:40px; height:40px; border-radius:100%">
+                              <p class="user-textName" style="line-height:40px; margin:0px; text-transform: uppercase; color:white; font-size:30px; font-weight:bold">{{this.username}}</p>
+                           </div>
+
+                           <div style="width:80%; margin-left:2%;">
+                              <p style="font-weight: bold; margin:0px; font-size:16px;word-wrap: break-word; margin-top:1%">{{this.username}}</p>
+                              <p class="comment-time">{{this.time}}</p>
+                              <a href="/comment/{{this.id}}/report" class="report-comment-btn"><p style="margin:0px; font-style:italic; font-size:12px; color:red">Báo vi phạm</p></a>
+                              {{#if this.selft}}
+                              <a href="/comment/{{this.id}}/delete" class="delete-comment-btn"><p style="margin:0px; font-style:italic; font-size:12px; color:red">Xóa</p></a>
+                              {{/if}}
+                              <p style="margin-top:1%; font-size:16px; word-wrap: break-word">{{this.content}}</p>
+                           </div>
+                        </div>                       
+                       {{/each}}
+
+                    </div>
+                    
+                </div>
+                {{/each}}               
+            </div>
+            <div class="products-tab-content-item products-tab-content-description"><p style="margin: 2% 2%;">{{destination.description}}</p></div>
+            <div class="products-tab-content-item products-tab-content-image">
+                {{#each images}}
+                   <img src="http://drive.google.com/uc?export=view&id={{this.thumb_url}}" style="width: 70%;object-fit: cover; margin:1% 0%">
+                 {{/each}}
+            </div>
+        </div>
+
+    </div>  
+</div>
+    
+
+
+
+</div>
+
+{{> footer}}
+<script>
+    //
+    const productsTabItem=document.getElementsByClassName('products-tab-item')
+    const productsTabContentItem=document.getElementsByClassName('products-tab-content-item')
+    for(let i=0; i< productsTabItem.length;i++){
+        productsTabItem[i].onclick=(e)=>{
+            for(let i=0; i<productsTabItem.length; i++){ 
+                productsTabItem[i].classList.remove('products-tab-item-active')
+                productsTabContentItem[i].classList.remove('product-content-active')   
+            }
+            productsTabItem[i].classList.add('products-tab-item-active')
+            productsTabContentItem[i].classList.add('product-content-active')
+        }
+    }
+    //
+    var userTextName = document.getElementsByClassName("user-textName");
+    for (let item of userTextName) {
+        let name = item.innerText.slice(0, 1)
+        item.innerText = name;
+    }
+    //
+    const repBtn=document.getElementsByClassName('rep-comment-btn')
+    const repForm=document.getElementsByClassName('rep-form')
+    for(let i=0; i< repBtn.length;i++){
+        repBtn[i].onclick=(e)=>{
+            if(repBtn[i].innerText=='Hủy'){
+                repForm[i].style.display='none'
+                repBtn[i].innerText='Trả lời'
+                return
+            }
+            repForm[i].style.display='block'
+            repBtn[i].innerText='Hủy'
+        }
+    }
+</script>

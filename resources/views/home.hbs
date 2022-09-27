@@ -1,0 +1,154 @@
+{{> header account=user.status id=user.userid name=user.username admin=user.admin}}
+
+<div class="wrapper">
+  <div class="slide-text">
+{{#each banner}}
+<div class="textshow{{this.id}}">
+  <h2 class="thin-font">{{this.description_up}}</h2>
+  <h1>{{this.description_down}}</h1>
+</div>
+{{/each}}
+</div>
+
+<div class="slideshows">
+  <div class="slideshow slideshow--hero">
+    <div class="slides">
+      {{#each banner}}
+      <div class="slide slide{{this.id}}" style="background-image: url(http://drive.google.com/uc?export=view&id={{this.thumb_url}});"></div>
+      {{/each}}
+    </div>
+  </div>
+  <div class="slideshow slideshow--contrast slideshow--contrast--before">
+    <div class="slides">
+      {{#each banner}}
+      <div class="slide slide{{this.id}}" style="background-image: linear-gradient(to bottom, rgba(200, 200, 75, 0.25) 0, rgba(200, 75, 75, 0.5) 100%), url(http://drive.google.com/uc?export=view&id={{this.thumb_url}})"></div>
+      {{/each}}
+    </div>
+  </div>
+  <div class="slideshow slideshow--contrast slideshow--contrast--after">
+    <div class="slides">
+      {{#each banner}}
+      <div class="slide slide{{this.id}}" style="background-image: linear-gradient(to bottom, rgba(200, 200, 75, 0.25) 0, rgba(200, 75, 75, 0.5) 100%), url(http://drive.google.com/uc?export=view&id={{this.thumb_url}})"></div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+<div id="diemden"></div>
+</div>
+
+<div class="text-center">
+  <h1 class="thin-font">Điểm đến không thể bỏ qua</h1>
+  <p>CHIÊM NGƯỠNG TUYỆT TÁC THIÊN NHIÊN</p>
+</div>
+
+    
+        <div class="splide" id="splide1">
+            <div class="splide__track">
+                <ul class="splide__list">
+                  {{#each destinations}}                 
+                    <li class="splide__slide">
+                      <a href="/diemden/{{this.name}}?id={{this._id}}">
+                        <div class="splide-item">
+                          <img src="http://drive.google.com/uc?export=view&id={{this.thumb_url}}" class="item_img" />
+                          <div class="text">
+                            <p class="text-text">{{this.name}}</p>
+                          </div>
+                        </div>
+                        </a>
+                    </li>
+                  {{/each}}
+                </ul>
+            </div>
+        </div>
+
+<div class="tour_container" style="background-image: url(/img/tour-bg.jpg);">
+<div style="position:absolute; width:100%">
+
+<div class="text-center">
+  <h1 class="thin-font">Tour tham gia trọn gói</h1>
+  <p>ĐƠN GIẢN HÓA LỊCH TRÌNH KHÁM PHÁ</p>
+</div>
+
+<div class="splide" id="splide2">
+            <div class="splide__track">
+                <ul class="splide__list">
+                  {{#each tours}}
+                    <li class="splide__slide">
+                        <div class="splide-item">
+                          <a href="/dichvu/tour/{{this.name}}?id={{this._id}}"><img src="http://drive.google.com/uc?export=view&id={{this.thumb_url}}" class="item_img" /></a>
+                          <div class="tour-text">
+                            <div class="tour-content">
+                              <a href="/dichvu/tour/{{this.name}}?id={{this._id}}">
+                                <h4 class="tour-name">{{this.name}}</h4>
+                              </a>
+                                <p class="price">{{this.price}}</p>
+                                <p class="description">{{this.description}}</p>
+                            </div>
+                          </div>
+                        </div>
+                    </li>
+                  {{/each}}
+                </ul>
+            </div>
+        </div>
+</div>
+</div>
+
+<div class="text-center">
+  <h1 class="thin-font">Thưởng thức món ngon tại Đà Lạt</h1>
+  <p>CẢM NHẬN TINH HOA ẨM THỰC</p>
+</div>
+
+    
+        <div class="splide" id="splide3">
+            <div class="splide__track">
+                <ul class="splide__list">
+                  {{#each eating_spot}}                 
+                    <li class="splide__slide">
+                      <a href="/diemanuong/{{this.name}}?id={{this._id}}">
+                        <div class="splide-item">
+                          <img src="http://drive.google.com/uc?export=view&id={{this.thumb_url}}" class="item_img" />
+                          <div class="text">
+                            <p class="text-text">{{this.name}}</p>
+                          </div>
+                        </div>
+                        </a>
+                    </li>
+                  {{/each}}
+                </ul>
+            </div>
+        </div>
+
+<div class="text-center">
+  <h1 class="thin-font">Thưởng thức đặc sản Đà Lạt</h1>
+  <p>CẢM NHẬN TINH HOA ẨM THỰC</p>
+</div>
+
+<div class="dishs_container grid wide">
+  <div class="row dish_center">
+    {{#each dishs}}
+    <div class="col l-3 m-4 c-6 dish_item">
+      <div class="itemm">
+        <img src="http://drive.google.com/uc?export=view&id={{this.thumb_url}}" alt="" class="dish_img" />
+        <div class="shadow"><p>{{this.name}}</p></div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>
+<script src="/js/home.js"></script>
+{{> footer}}
+<script>
+  const elementPrice=document.getElementsByClassName('price')
+  
+  function formatCash(str) {
+    return str.split('').reverse().reduce((prev, next, index) => {
+        return ((index % 3) ? next : (next + ',')) + prev
+        })
+    }
+
+  for (let item of elementPrice){
+    item.innerHTML='Giá: ' + formatCash(item.innerHTML) + '₫'
+  }
+
+</script>

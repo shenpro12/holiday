@@ -1,0 +1,138 @@
+{{> header account=user.status id=user.userid name=user.username admin=user.admin}}
+
+<div class="header-space"></div>
+
+<div class="tour-container">
+
+   <div class="grid wide">
+      <div class="row">
+          <div class="col l-3 m-3 c-12 tour-catalog">
+
+              <div style="width: 100%; text-align:left">
+                  <h2>Xếp theo giá</h2>
+                  <div class="is-divider"></div>
+                  <ul>
+                      <a href="/dichvu/page-1"><li class="catalog-item"><p>Tất cả</p></li></a>
+                      <a href="/dichvu/page-1/?filter=500000"><li class="catalog-item"><p>>Dưới 5 trăm nghìn</p></li></a>
+                      <a href="/dichvu/page-1/?filter=1000000"><li class="catalog-item"><p>>Dưới 1 triệu đồng</p></li></a>
+                      <a href="/dichvu/page-1/?filter=2000000"><li class="catalog-item"><p>>Dưới 2 triệu đồng</p></li></a>
+                      <a href="/dichvu/page-1/?filter=3000000"><li class="catalog-item"><p>>Dưới 3 triệu đồng</p></li></a>
+                  </ul>
+              </div>
+
+              <div style="width: 100%; text-align:left; margin-top: 10%">
+                  <h2>Tìm kiếm TOUR du lịch</h2>
+                  <div class="is-divider"></div>
+                  <input id="search_input" style="padding: 15px; background-color:white; border: 1px solid rgb(87, 87, 87); width:100%" placeholder="Nhập từ khóa muốn tìm..."/>
+                  <ul class="search_item">
+                      <div id="search_item_content">
+                          
+                      </div>
+                  </ul>
+              </div>
+
+          </div>
+
+          <div class="col l-9 m-9 c-12">
+               <div class="row">
+                 {{#each items}}
+                    <div class="col l-4 m-4 c-6 tour-item" >
+                        <div style="width:100%; height:350px;">
+                            <div style="width:100%; height:40%;">
+                                <a href="/dichvu/tour/{{this.name}}?id={{this._id}}"><img src="http://drive.google.com/uc?export=view&id={{this.thumb_url}}" style="width: 100%; height:100%;border-top-left-radius: 5px;border-top-right-radius: 5px;" /></a>
+                            </div>
+                            <div class="tour-item-item" style="width:100%; height:60%;box-shadow: 0 0 4px rgba(0, 0, 0, 0.3); position:relative; text-align:center">
+                                <a href="/dichvu/tour/{{this.name}}?id={{this._id}}">
+                                   <p style="color:black; margin:0% 1%; padding-top:10%; font-weight:bold">{{this.name}}</p>
+                                </a>
+                               <p class="price">{{this.price}}</p>
+                               <a href="/dichvu/tour/{{this.name}}?id={{this._id}}">
+                                  <p style="display: inline-block; color: black; text-align:center; font-style:italic; margin-top:5%; font-size:12px; color:rgba(0, 0, 0, 0.6)">Xem chi tiết...</p>
+                               </a>
+                            </div>
+                        </div>
+                                
+                     
+                    </div>
+                  {{/each}}  
+               </div>
+
+               
+               <div  class="page-button" >  
+               {{#if pagePre}}
+                  <a href="/dichvu/page-{{pagePreNumber}}"><i class="ti-arrow-circle-left"></i></a>
+               {{/if}}
+               
+               {{#if pageNext}}
+               <a href="/dichvu/page-{{pageNextNumber}}"><i class="ti-arrow-circle-right"></i></a>
+               {{/if}} 
+               </div>
+
+            </div>
+       </div>
+
+    </div>
+
+
+</div>
+{{> footer}}
+<script>    
+    let li=document.getElementsByClassName('catalog-item')
+    const a=({{catalogActive}}0).toString()
+    
+    if(a=='0'){
+       li[0].classList.add('tour-catalog-active')
+    } else {
+        for(let i=1; i<=4; i++){
+           if(li[i].childNodes[0].innerHTML.indexOf(a.toString()[0]) != -1 ){
+               li[i].classList.add('tour-catalog-active')
+               break
+           }
+        }
+    }
+
+    //
+    const elementPrice=document.getElementsByClassName('price')
+  
+  function formatCash(str) {
+    return str.split('').reverse().reduce((prev, next, index) => {
+        return ((index % 3) ? next : (next + ',')) + prev
+        })
+    }
+
+  for (let item of elementPrice){
+    item.innerHTML='Giá: '+formatCash(item.innerHTML) + '₫'
+  }
+  //
+  const searchItemContent= document.getElementById('search_item_content')
+  const searchInput= document.getElementById('search_input')
+
+  searchInput.addEventListener('input',async function (e) {
+      function removeAllChildNodes(parent) {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+      }
+      removeAllChildNodes(searchItemContent);
+      if(e.target.value!=''){
+          await fetch('http://localhost:3000/dichvu/api/search/tour/'+ e.target.value)
+                   .then(function(res){
+                        return res.json()
+                    })
+                   .then(function(datas){
+                        let htmls = datas.map(function(data){
+                            let tempStr=data.name.toUpperCase()
+                            let new_tempStr=tempStr.replace(e.target.value.toUpperCase(), `<span style="color:darkorange">${e.target.value.toUpperCase()}</span>`)
+                        return `<a href="/dichvu/tour/${data.name}?id=${data._id}"><li>${new_tempStr}</li></a>`
+                        })
+                        let html = htmls.join('')
+                        searchItemContent.innerHTML=html
+                    })
+                    .catch(function(err){
+                        console.log(err)
+                    })
+        }
+    }
+  )
+
+</script>

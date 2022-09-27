@@ -1,0 +1,79 @@
+<div class="header-container " id="header-container">
+    <label class="menu" for="nav__mobile__input">
+        <i class="ti-menu"></i>
+    </label>
+    <div class="logo">
+        <a href="/">
+        <img class="logo-image" 
+            id="logo-image"
+            src="/img/logo.png" 
+            alt="TravelVietNam">
+        </a>
+    </div>
+    <ul  class="navbar">
+        <li><a href="/"><b>TRANG CHỦ</b></a></li>
+        <li><a href="/hotel/page-1"><b>KHÁCH SẠN</b></a></li>
+        <li><a href="/dichvu/page-1"><b>DỊCH VỤ</b></a></li>
+        <li><a href="/news/page-1"><b>TIN TỨC</b></a></li>
+        <li><a href="/map"><b>BẢN ĐỒ</b></a></li>
+    </ul>
+    
+    {{#if account}}
+    <div class="login">
+        <ul style="display: inline-block;">
+            <li class="login-image"> 
+                <div style="width: 30px; height:30px; background-color:rgb(63, 152, 152); margin:0px; border-radius:100%; text-align:center">
+                    <p class="user-textName" style="color: white; margin:0px; font-size:30px; text-transform: uppercase">{{name}}</p>
+                </div>
+            </li>
+            <li class="login-option">
+                <div style="width:100%; text-align:center; padding-top:10px; position:relative ">
+                    <p class="user-textName" style="width: 80px; height:80px; color: white; margin:auto; font-size:70px; background-color:rgb(63, 152, 152); border-radius:100%; text-transform: uppercase">{{name}}</p>
+                    <p style="font-weight:bold">{{name}}</p>
+                    <a class="managerAcc_btn" href="/taikhoan/prof/{{id}}"><p>Quản lý tài khoản của bạn</p></a>
+                    {{#if admin}}
+                    <a class="managerAcc_btn" href="/quantri" style="margin-top: 1%;"><p>Quản trị Website</p></a>
+                    {{/if}}
+                    <a class="logout_btn" href="/taikhoan/dangxuat"><p>Đăng xuất</p></a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    {{else}}
+    <div class="login">
+        <a href="/taikhoan/dangnhap"><i class="ti-user"></i></a>
+    </div>
+    {{/if}}
+
+    
+
+<input type="checkbox" class="nav__input" id="nav__mobile__input"/>
+<label class="nav-overlay" for="nav__mobile__input"></label>
+<div class="navbar-mobile">
+    <ul>
+        <a href="/"><li><b>TRANG CHỦ</b></li></a>
+        <a href="/hotel/page-1"><li><b>KHÁCH SẠN</b></li></a>
+        <a href="/dichvu/page-1"><li><b>DỊCH VỤ</b></li></a>
+        <a href="/news/page-1"><li><b>TIN TỨC</b></li></a>
+        <a href="/map"><li><b>BẢN ĐỒ</b></li></a>
+        {{#if account}}
+        <a href="/taikhoan/prof/{{id}}"><li><b>TÀI KHOẢN</b></li></a>
+           {{#if admin}}
+           <a href="/quantri"><li><b>QUẢN TRỊ</b></li></a>
+           {{/if}}
+        <a href="/taikhoan/dangxuat"><li><b>ĐĂNG XUẤT</b></li></a>
+        {{else}}
+        <a href="/taikhoan/dangnhap"><li><b>ĐĂNG NHẬP</b></li></a>
+        {{/if}}
+    </ul>
+</div>
+<label class="close" for="nav__mobile__input">
+    <i class="ti-close"></i>
+</label>
+
+</div>
+
+<i class="ti-arrow-circle-up btn_up" id="btn_up"></i>
+<script src="/js/header.js"></script>
+
+

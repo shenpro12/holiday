@@ -1,0 +1,156 @@
+.dashboard_container {
+    width: 100%;
+    display: flex;
+    margin-top: 2%;
+}
+
+.dashboard_container>div>div>ul>li {
+    margin-left: 10%;
+    margin-top: 5px;
+    list-style: none;
+    color: rgb(116, 109, 109);
+    padding: 15px 5px;
+}
+
+.dashboard_container>div>div>ul>li:hover {
+    background-color: rgb(241, 232, 232);
+    cursor: pointer;
+}
+
+.dashboard_container>div>div>ul>li>p {
+    margin: 0px;
+}
+
+.dashboard_container>div>div>.is-divider {
+    margin-left: 5%;
+}
+
+.dashboard_container>div>div>label {
+    margin-left: 5%;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    margin-right: 0%;
+    display: block;
+    color: black;
+    font-size: 16px
+}
+
+.dashboard_option_active {
+    color: darkorange !important;
+    border-left: 2px solid darkorange;
+    font-weight: bold;
+    background-color: rgb(241, 232, 232);
+}
+
+.dashboard_catalog {
+    width: 20%;
+    border-right: 1px solid black;
+    padding-right: 5px;
+    overflow: auto;
+}
+
+.dashboard_catalog::-webkit-scrollbar {
+    display: none;
+}
+
+.dashboard_item_container {
+    width: 85%;
+    height: 650px;
+    overflow: auto;
+}
+
+.scroll_line {
+    width: 100%;
+    height: 60px;
+    background-color: #bf7500;
+    display: none;
+}
+
+@media (max-width:600px) {
+    .dashboard_container,
+    .scroll_line {
+        display: block;
+    }
+    .dashboard_catalog,
+    .dashboard_item_container {
+        width: 100%;
+        border-right: 0px
+    }
+    .dashboard_catalog {
+        max-height: 300px;
+    }
+    .dashboard_container>div>div>ul>li {
+        margin-left: 5%;
+    }
+}
+
+.dashboard_option_manager_content {
+    display: none;
+}
+
+.dashboard_input_manager_account:checked~.dashboard_option_manager_account {
+    display: none;
+}
+
+.dashboard_input_manager_content:checked~.dashboard_option_manager_content {
+    display: block;
+}
+
+.dashboard_header:hover {
+    color: darkorange;
+}
+
+.dashboard_item_container>div>table {
+    border-collapse: collapse;
+}
+
+.dashboard_item_container>div>table th,
+.dashboard_item_container>div>table td {
+    border: 1px solid black;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.dashboard_item {
+    margin-left: 3%;
+    display: none
+}
+
+.dashboard_item_active {
+    display: block
+}
+
+.addDestination_Form,
+.addHomeBanner_Form,
+.updateHomeBanner_Form,
+.addEatingSpot_Form {
+    text-align: left;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    padding: 15px;
+}
+
+.addDestination_Form>input,
+.addDestination_Form>div>div>input,
+.addHomeBanner_Form>input,
+.updateHomeBanner_Form>input,
+.addEatingSpot_Form>input {
+    background-color: white;
+    padding: 15px;
+    border: 1px solid black;
+    margin: 0px;
+}
+
+#addImage:hover,
+.addDestination_Form>#addImage_container>div>p:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#addService_container>div>input {
+    margin: 2% 0px;
+}
+
+#addService_container>div>p {
+    margin: 2% 0px;
+    color: black;
+}

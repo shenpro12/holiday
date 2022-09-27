@@ -1,0 +1,51 @@
+.fitem-logo {
+    margin-top: 6%;
+    height: 180px;
+    width: 250px;
+}
+
+.fitem-text {
+    margin-top: 6%;
+    color: white;
+}
+
+.col {
+    text-align: center;
+}
+
+.footerContainer {
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 100%;
+    position: relative;
+    margin-top: 5%;
+}
+
+.footer_img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    object-fit: cover;
+}
+
+.fitem-text i {
+    margin-right: 1%;
+}
+
+@media (max-width:740px) {
+    .fitem-logo {
+        margin-top: 0%;
+        height: 120px;
+        width: 190px;
+    }
+    .fitem-text {
+        margin-top: 0%;
+    }
+}
+
+@media (max-width:350px) {
+    .fitem-logo {
+        height: 100px;
+        width: 170px;
+    }
+}

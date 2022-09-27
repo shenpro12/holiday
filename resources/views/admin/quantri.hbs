@@ -1,0 +1,674 @@
+{{> header account=user.status id=user.userid name=user.username admin=user.admin}}
+
+<div class="header-space"></div>
+<div class="dashboard_container">
+    <div class="dashboard_catalog">
+
+        <div style="width: 100%; text-align:left">
+            <label for="dashboard_input_manager_account">
+                <h2 class="dashboard_header">Quản lý tài khoản người dùng</h2>
+            </label>
+            <input type="checkbox" style="display: none;" id="dashboard_input_manager_account" class="dashboard_input_manager_account"/>
+            <div class="is-divider"></div>
+            <ul class="dashboard_option_manager_account">
+                <li class="catalog-item dashboard_option_active"><p>Tài khoản người dùng</p></li>
+                <li class="catalog-item"><p>Bình luận vi phạm</p></li>
+            </ul>
+        </div>
+
+        <div style="width: 100%; text-align:left">
+            <label for="dashboard_input_manager_content">
+                <h2 class="dashboard_header">Quản lý giao diện Website</h2>
+            </label>
+            <input type="checkbox" style="display: none;" id="dashboard_input_manager_content" class="dashboard_input_manager_content"/>
+            <div class="is-divider"></div>
+            <ul class="dashboard_option_manager_content"> 
+                <li class="catalog-item"><p>Banner trang chủ</p></li>
+                <li class="catalog-item"><p>Địa điểm du lịch</p></li>
+                <li class="catalog-item"><p>Địa điểm ăn uống</p></li>
+                <li class="catalog-item"><p>Món ăn đặc sản</p></li>
+                <li class="catalog-item"><p>Khách sạn</p></li>
+                <li class="catalog-item"><p>Sản phẩm(bán)</p></li>
+                <li class="catalog-item"><p>Sản phẩm(Đơn hàng)</p></li>
+                <li class="catalog-item"><p>Tin tức</p></li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="scroll_line"></div>
+    <div class="dashboard_item_container">
+
+        <div class="dashboard_item dashboard_item_active">
+            <h3 style="margin-bottom: 3%">Tài khoản người dùng</h3>
+            <input id="findAccount_input" style="border:1px solid black; margin-top: 0px; margin-left: 0px; margin-right: 0px; margin-bottom: 3%; padding: 15px; background-color:white" placeholder="Nhập tên tài khoản..."/>
+            <table id="findAccount_result" style="width: 2000px;margin-bottom:2%"></table>
+            <table style="width: 2000px;margin-bottom:2%" id="account_manager_tab">
+                <tr>
+                    <th><p>STT</p></th>
+                    <th><p>UserName</p></th>
+                    <th><p>Name</p></th>
+                    <th><p>Gender</p></th>
+                    <th><p>Bird</p></th>
+                    <th><p>Location</p></th>
+                    <th><p>Work</p></th>
+                    <th><p>Email</p></th>
+                    <th><p>Option</p></th>
+                </tr>
+                {{#each account}}
+                <tr>
+                    <td><p>{{@index}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.username}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.name}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.male}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.bird}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.location}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.work}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.mail}}</p></td>
+                    <td>
+                        <div style="width:100px; display: flex; justify-content:center">
+                            <a href="/quantri/resetPasswordAccount/{{this._id}}"><p style="color:green">reset password</p></a>
+                            <a href="/quantri/deleteAccount/{{this._id}}"><p style="margin-left: 5%; color:red">Xóa</p></a>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+
+        <div class="dashboard_item">
+            <h3 style="margin-bottom: 3%">Bình luận vi phạm</h3>
+            <a href="/quantri/deleteAllReportComment"><p style="color:darkorange">Xóa tất cả</p></a>
+            <table style="width: 1000px;margin-bottom:2%">
+                <tr>
+                    <th><p>STT</p></th>
+                    <th><p>Content</p></th>
+                    <th><p>Option</p></th>
+                </tr>
+                {{#each reportComment}}
+                <tr>
+                    <td><p>{{@index}}</p></td>
+                    <td><p style="margin:auto; width:250px; overflow:hidden; overflow-x:auto">{{this.content}}</p></td>
+                    <td>
+                        <div style="width:100px; display: flex; justify-content:center">
+                           <a href="/quantri/deleteReportComment/{{this.commentId}}"><p style="margin-left: 5%; color:red">Xóa</p></a>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+
+        <div class="dashboard_item">
+            <h3 style="margin-bottom: 3%">Banner trang chủ</h3>
+            <a href="/quantri/addHomeBanner"><p style="color:darkorange">Thêm Banner</p></a>
+            <table style="width: 2000px;margin-bottom:2%">
+                <tr>
+                    <th><p>STT</p></th>
+                    <th><p>Name</p></th>
+                    <th><p>Description_down</p></th>
+                    <th><p>Description_up</p></th>
+                    <th><p>Thumb_url</p></th>
+                    <th><p>Option</p></th>
+                </tr>
+                {{#each homebanner}}
+                <tr>
+                    <td><p>{{@index}}</p></td>
+                    <td><p style="margin:auto; width:250px; overflow:hidden; overflow-x:auto">{{this.name}}</p></td>
+                    <td><p style="margin:auto; width:250px; overflow:hidden; overflow-x:auto">{{this.description_down}}</p></td>
+                    <td><p style="margin:auto; width:250px; overflow:hidden; overflow-x:auto">{{this.description_up}}</p></td>
+                    <td><p style="margin:auto; width:250px; overflow:hidden; overflow-x:auto">{{this.thumb_url}}</p></td>
+                    <td>
+                        <div style="width:100px; display: flex; justify-content:center">
+                            <a href="/quantri/updateHomeBanner/{{this._id}}"><p style="color:green">Sửa</p></a>
+                            <a href="/quantri/deleteHomeBanner/{{this._id}}"><p style="margin-left: 5%; color:red">Xóa</p></a>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+
+        <div class="dashboard_item">
+            <h3 style="margin-bottom: 3%;">Địa điểm du lịch</h3>
+            <a href="/quantri/addDestination"><p style="color:darkorange">Thêm địa điểm</p></a>
+            <input id="findDestination_input" style="border:1px solid black; margin-top: 0px; margin-left: 0px; margin-right: 0px; margin-bottom: 3%; padding: 15px; background-color:white" placeholder="Nhập tên địa điểm..."/>
+            <table style="margin-bottom:2%" id="findDestination_result"></table>
+            <table style="width: 2000px;margin-bottom:2%" id="destination_manager_tab">
+                <tr>
+                    <th><p>STT</p></th>
+                    <th><p>Name</p></th>
+                    <th><p>Description</p></th>
+                    <th><p>Location</p></th>
+                    <th><p>price</p></th>
+                    <th><p>Thumb_url</p></th>
+                    <th><p>Option</p></th>
+                </tr>
+                {{#each destination}}
+                <tr>
+                    <td><p>{{@index}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto">{{this.name}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto; height:300px">{{this.description}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto">{{this.location}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto">{{this.price}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto">{{this.thumb_url}}</p></td>
+                    <td>
+                        <div style="width:100px; display: flex; justify-content:center">
+                            <a href="/quantri/updateDestination/{{this._id}}"><p style="color:green">Sửa</p></a>
+                            <a href="/quantri/deleteDestination/{{this._id}}"><p style="margin-left: 5%; color:red">Xóa</p></a>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+
+        <div class="dashboard_item">
+            <h3 style="margin-bottom: 3%">Địa điểm ăn uống</h3>
+            <a href="/quantri/addEatingSpot"><p style="color:darkorange">Thêm địa điểm</p></a>
+            <input id="findEatingSpot_input" style="border:1px solid black; margin-top: 0px; margin-left: 0px; margin-right: 0px; margin-bottom: 3%; padding: 15px; background-color:white" placeholder="Nhập tên địa điểm..."/>
+            <table style="margin-bottom:2%" id="findEatingSpot_result"></table>
+            <table style="width: 2000px;margin-bottom:2%" id="eatingSpot_manager_tab">
+                <tr>
+                    <th><p>STT</p></th>
+                    <th><p>Name</p></th>
+                    <th><p>Phone</p></th>
+                    <th><p>Open</p></th>
+                    <th><p>Location</p></th>
+                    <th><p>Description</p></th>
+                    <th><p>Thumb_url</p></th>
+                    <th><p>Option</p></th>
+                </tr>
+                {{#each eating_spot}}
+                <tr>
+                    <td><p>{{@index}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.name}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.phone}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.open}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.location}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto; height:300px">{{this.description}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.thumb_url}}</p></td>
+                    <td>
+                        <div style="width:100px; display: flex; justify-content:center">
+                            <a href="/quantri/updateEatingSpot/{{this._id}}"><p style="color:green">Sửa</p></a>
+                            <a href="/quantri/deleteEatingSpot/{{this._id}}"><p style="margin-left: 5%; color:red">Xóa</p></a>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+
+        <div class="dashboard_item">
+            <h3 style="margin-bottom: 3%">Món ăn đặc sản</h3>
+            <a href="/quantri/addspecialDish"><p style="color:darkorange">Thêm món ăn</p></a>
+            <table style="width: 2000px;margin-bottom:2%">
+                <tr>
+                    <th><p>STT</p></th>
+                    <th><p>Name</p></th>
+                    <th><p>Thumb_url</p></th>
+                    <th><p>Option</p></th>
+                </tr>
+                {{#each special_dish}}
+                <tr>
+                    <td><p>{{@index}}</p></td>
+                    <td><p style="margin:auto; width:250px; overflow:hidden; overflow-x:auto">{{this.name}}</p></td>
+                    <td><p style="margin:auto; width:250px; overflow:hidden; overflow-x:auto">{{this.thumb_url}}</p></td>
+                    <td>
+                        <div style="width:100px; display: flex; justify-content:center">
+                            <a href="/quantri/updatespecialDish/{{this._id}}"><p style="color:green">Sửa</p></a>
+                            <a href="/quantri/deletespecialDish/{{this._id}}"><p style="margin-left: 5%; color:red">Xóa</p></a>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+
+        <div class="dashboard_item">
+            <h3 style="margin-bottom: 3%">Khách sạn</h3>
+            <a href="/quantri/addHotel"><p style="color:darkorange">Thêm khách sạn</p></a>
+            <input id="findHotel_input" style="border:1px solid black; margin-top: 0px; margin-left: 0px; margin-right: 0px; margin-bottom: 3%; padding: 15px; background-color:white" placeholder="Nhập tên khách sạn..."/>
+            <table id="findHotel_result" style="width: 2000px;margin-bottom:2%"></table>
+            <table style="width: 2000px;margin-bottom:2%" id="hotel_manager_tab">
+                <tr>
+                    <th><p>STT</p></th>
+                    <th><p>Name</p></th>
+                    <th><p>Location</p></th>
+                    <th><p>Description</p></th>
+                    <th><p>Type</p></th>
+                    <th><p>Option</p></th>
+                </tr>
+                {{#each hotel}}
+                <tr>
+                    <td><p>{{@index}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.name}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.location}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto; height:300px">{{this.description}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.type}}</p></td>
+                    <td>
+                        <div style="width:100px; display: flex; justify-content:center">
+                            <a href="/quantri/updateHotel/{{this._id}}"><p style="color:green">Sửa</p></a>
+                            <a href="/quantri/deleteHotel/{{this._id}}"><p style="margin-left: 5%; color:red">Xóa</p></a>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+
+        <div class="dashboard_item">
+            <h3 style="margin-bottom: 3%">Sản phẩm(bán)</h3>
+            <a href="/quantri/addTour"><p style="color:darkorange">Thêm sản phẩm</p></a>
+            <input id="findProduct_input" style="border:1px solid black; margin-top: 0px; margin-left: 0px; margin-right: 0px; margin-bottom: 3%; padding: 15px; background-color:white" placeholder="Nhập tên sản phẩm..."/>
+            <table id="findProduct_result" style="width: 2000px;margin-bottom:2%"></table>
+            <table style="width: 2000px;margin-bottom:2%" id="product_manager_tab">
+                <tr>
+                    <th><p>STT</p></th>
+                    <th><p>Name</p></th>
+                    <th><p>Description</p></th>
+                    <th><p>Price</p></th>
+                    <th><p>Thumb_url</p></th>
+                    <th><p>Option</p></th>
+                </tr>
+                {{#each tour}}
+                <tr>
+                    <td><p>{{@index}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.name}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto; height:300px">{{this.description}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.price}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.thumb_url}}</p></td>
+                    <td>
+                        <div style="width:100px; display: flex; justify-content:center">
+                            <a href="/quantri/updateTour/{{this._id}}"><p style="color:green">Sửa</p></a>
+                            <a href="/quantri/deleteTour/{{this._id}}"><p style="margin-left: 5%; color:red">Xóa</p></a>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+
+        <div class="dashboard_item">
+            <h3 style="margin-bottom: 3%">Sản phẩm(Đơn hàng)</h3>
+            <a href="/quantri/tour/oder/export"><p style="color:darkorange">Xuất file</p></a>
+            <table style="width: 2000px;margin-bottom:2%">
+                <tr>
+                    <th><p>STT</p></th>
+                    <th><p>Tour</p></th>
+                    <th><p>Name</p></th>
+                    <th><p>Email</p></th>
+                    <th><p>Tittle</p></th>
+                    <th><p>Content</p></th> 
+                </tr>
+                {{#each booking}}
+                <tr>
+                    <td><p>{{@index}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.tourname}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.username}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.email}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.tittle}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto; height:300px">{{this.content}}</p></td>
+                </tr>
+                {{/each}}
+            </table>
+        </div> 
+
+
+        <div class="dashboard_item">
+            <h3 style="margin-bottom: 3%">Tin tức</h3>
+            <a href="/quantri/addNews"><p style="color:darkorange">Thêm bài viết</p></a>
+            <input id="findnews_input" style="border:1px solid black; margin-top: 0px; margin-left: 0px; margin-right: 0px; margin-bottom: 3%; padding: 15px; background-color:white" placeholder="Nhập tên bài viết..."/>
+            <table style="margin-bottom:2%" id="findnews_result"></table>
+            <table style="width: 1000px;margin-bottom:2%" id="news_manager_tab">
+                <tr>
+                    <th><p>STT</p></th>
+                    <th><p>Tittle</p></th>
+                    <th><p>Time</p></th>
+                    <th><p>Option</p></th>
+                </tr>
+                {{#each news}}
+                <tr>
+                    <td><p>{{@index}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.tittle}}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">{{this.time}}</p></td>
+                    <td>
+                        <div style="width:100px; display: flex; justify-content:center">
+                            <a href="/quantri/updateNews/{{this._id}}"><p style="color:green">Sửa</p></a>
+                            <a href="/quantri/deleteNews/{{this._id}}"><p style="margin-left: 5%; color:red">Xóa</p></a>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+
+    </div>
+
+</div>
+<script>
+    const catalogItem = document.getElementsByClassName('catalog-item')
+    const dashboardItem = document.getElementsByClassName('dashboard_item')
+
+    function hideItem(item){
+        for(let i=0; i<item.length; i++){
+            if(item[i].classList.contains('dashboard_option_active')){
+                item[i].classList.remove('dashboard_option_active')
+            }
+            if(item[i].classList.contains('dashboard_item_active')){
+                item[i].classList.remove('dashboard_item_active')
+            }
+        }
+    }
+
+    for(let i=0; i<catalogItem.length; i++){
+        catalogItem[i].onclick = function(e){
+            hideItem(catalogItem)
+            hideItem(dashboardItem)
+            catalogItem[i].classList.add('dashboard_option_active')
+            dashboardItem[i].classList.add('dashboard_item_active')
+        }
+    }
+    //findAccount
+    const findAccountInput = document.getElementById('findAccount_input')
+    const findAccountResult = document.getElementById('findAccount_result')
+    findAccountResult.style.display='none'
+    findAccountInput.addEventListener('input', async function(e){
+        if(e.target.value){
+            document.getElementById('account_manager_tab').style.display='none'
+            findAccountResult.style.display='block'
+            await fetch('http://localhost:3000/quantri/api/findAccount/'+ e.target.value)
+            .then(res=> res.json())
+            .then(datas=>{
+                let htmls= datas.map((item,index)=>{
+                    return `
+                    <tr>
+                    <td><p>${index}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">${item.username}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">${(item.name ? item.name : '_')}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">${(item.male ? item.male : '_')}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">${(item.bird ? item.bird : '_')}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">${(item.location ? item.location : '_')}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">${(item.work ? item.work : '_')}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:hidden; overflow-x:auto">${(item.mail ? item.mail : '_')}</p></td>
+                    <td>
+                        <div style="width:100px; display: flex; justify-content:center">
+                            <a href="/quantri/resetPasswordAccount/${item._id}"><p style="color:green">reset password</p></a>
+                            <a href="/quantri/deleteAccount/${item._id}"><p style="margin-left: 5%; color:red">Xóa</p></a>
+                        </div>
+                    </td>
+                </tr>
+                    `
+                })
+                htmls.join('')
+                let HTML= `
+                <tr>
+                    <th><p>STT</p></th>
+                    <th><p>UserName</p></th>
+                    <th><p>Name</p></th>
+                    <th><p>Gender</p></th>
+                    <th><p>Bird</p></th>
+                    <th><p>Location</p></th>
+                    <th><p>Work</p></th>
+                    <th><p>Email</p></th>
+                    <th><p>Option</p></th>
+                </tr>
+                `+htmls
+                findAccountResult.innerHTML= HTML
+            })
+            .catch(function(err){
+                console.log(err)
+            })
+        } else{
+            document.getElementById('account_manager_tab').style.display='block'
+            findAccountResult.style.display='none'
+        }
+    })
+    //findDestination
+    const findDestinationInput = document.getElementById('findDestination_input')
+    const findDestinationResult = document.getElementById('findDestination_result')
+    findDestinationResult.style.display='none'
+    findDestinationInput.addEventListener('input', async function(e){
+        if(e.target.value){
+            document.getElementById('destination_manager_tab').style.display='none'
+            findDestinationResult.style.display='block'
+            await fetch('http://localhost:3000/quantri/api/findDestination/'+ e.target.value)
+            .then(res=> res.json())
+            .then(datas=>{
+                let htmls= datas.map((item,index)=>{
+                    return `
+                    <tr>
+                    <td><p>${index}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto">${item.name}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto; height:300px">${item.description}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto">${item.location}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto">${item.price}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto">${item.thumb_url}</p></td>
+                    <td>
+                        <div style="width:100px; display: flex; justify-content:center">
+                            <a href="/quantri/updateDestination/${item._id}"><p style="color:green">Sửa</p></a>
+                            <a href="/quantri/deleteDestination/${item._id}"><p style="margin-left: 5%; color:red">Xóa</p></a>
+                        </div>
+                    </td>
+                </tr>
+                    `
+                })
+                htmls.join('')
+                let HTML= `
+                <tr>
+                    <th><p>STT</p></th>
+                    <th><p>Name</p></th>
+                    <th><p>Description</p></th>
+                    <th><p>Location</p></th>
+                    <th><p>price</p></th>
+                    <th><p>Thumb_url</p></th>
+                    <th><p>Option</p></th>
+                </tr>
+                `+htmls
+                findDestinationResult.innerHTML= HTML
+            })
+            .catch(function(err){
+                console.log(err)
+            })
+        } else{
+            document.getElementById('destination_manager_tab').style.display='block'
+            findDestinationResult.style.display='none'
+        }
+    })
+    //findEatingSpot
+    const findEatingSpotInput = document.getElementById('findEatingSpot_input')
+    const findEatingSpotResult = document.getElementById('findEatingSpot_result')
+    findEatingSpotResult.style.display='none'
+    findEatingSpotInput.addEventListener('input', async function(e){
+        if(e.target.value){
+            document.getElementById('eatingSpot_manager_tab').style.display='none'
+            findEatingSpotResult.style.display='block'
+            await fetch('http://localhost:3000/quantri/api/findEatingSpot/'+ e.target.value)
+            .then(res=> res.json())
+            .then(datas=>{
+                let htmls= datas.map((item,index)=>{
+                    return `
+                    <tr>
+                    <td><p>${index}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto">${item.name}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto">${item.phone}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto">${item.open}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto">${item.location}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto; height:300px">${item.description}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto">${item.thumb_url}</p></td>
+                    <td>
+                        <div style="width:100px; display: flex; justify-content:center">
+                            <a href="/quantri/updateEatingSpot/${item._id}"><p style="color:green">Sửa</p></a>
+                            <a href="/quantri/deleteEatingSpot/${item._id}"><p style="margin-left: 5%; color:red">Xóa</p></a>
+                        </div>
+                    </td>
+                </tr>
+                    `
+                })
+                htmls.join('')
+                let HTML= `
+                <tr>
+                    <th><p>STT</p></th>
+                    <th><p>Name</p></th>
+                    <th><p>Phone</p></th>
+                    <th><p>Open</p></th>
+                    <th><p>Location</p></th>
+                    <th><p>Description</p></th>
+                    <th><p>Thumb_url</p></th>
+                    <th><p>Option</p></th>
+                </tr>
+                `+htmls
+                findEatingSpotResult.innerHTML= HTML
+            })
+            .catch(function(err){
+                console.log(err)
+            })
+        } else{
+            document.getElementById('eatingSpot_manager_tab').style.display='block'
+            findEatingSpotResult.style.display='none'
+        }
+    })
+    //findhotel
+    const findHotelInput = document.getElementById('findHotel_input')
+    const findHotelResult = document.getElementById('findHotel_result')
+    findHotelResult.style.display='none'
+    findHotelInput.addEventListener('input', async function(e){
+        if(e.target.value){
+            document.getElementById('hotel_manager_tab').style.display='none'
+            findHotelResult.style.display='block'
+            await fetch('http://localhost:3000/quantri/api/findHotel/'+ e.target.value)
+            .then(res=> res.json())
+            .then(datas=>{
+                let htmls= datas.map((item,index)=>{
+                    return `
+                    <tr>
+                    <td><p>${index}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto">${item.name}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto">${item.location}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto; height:300px">${item.description}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto">${item.type}</p></td>
+                    <td>
+                        <div style="width:100px; display: flex; justify-content:center">
+                            <a href="/quantri/updateHotel/${item._id}"><p style="color:green">Sửa</p></a>
+                            <a href="/quantri/deleteHotel/${item._id}"><p style="margin-left: 5%; color:red">Xóa</p></a>
+                        </div>
+                    </td>
+                </tr>
+                    `
+                })
+                htmls.join('')
+                let HTML= `
+                <tr>
+                    <th><p>STT</p></th>
+                    <th><p>Name</p></th>
+                    <th><p>Location</p></th>
+                    <th><p>Description</p></th>
+                    <th><p>Type</p></th>
+                    <th><p>Option</p></th>
+                </tr>
+                `+htmls
+                findHotelResult.innerHTML= HTML
+            })
+            .catch(function(err){
+                console.log(err)
+            })
+        } else{
+            document.getElementById('hotel_manager_tab').style.display='block'
+            findDestinationResult.style.display='none'
+        }
+    })
+    //findProduct
+    const findProductInput = document.getElementById('findProduct_input')
+    const findProductResult = document.getElementById('findProduct_result')
+    findHotelResult.style.display='none'
+    findProductInput.addEventListener('input', async function(e){
+        if(e.target.value){
+            document.getElementById('product_manager_tab').style.display='none'
+            findProductResult.style.display='block'
+            await fetch('http://localhost:3000/quantri/api/findTour/'+ e.target.value)
+            .then(res=> res.json())
+            .then(datas=>{
+                let htmls= datas.map((item,index)=>{
+                    return `
+                    <tr>
+                    <td><p>${index}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto">${item.name}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto; height:300px">${item.description}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto;">${item.price}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto">${item.thumb_url}</p></td>
+                    <td>
+                        <div style="width:100px; display: flex; justify-content:center">
+                            <a href="/quantri/updateTour/${item._id}"><p style="color:green">Sửa</p></a>
+                            <a href="/quantri/deleteTour/${item._id}"><p style="margin-left: 5%; color:red">Xóa</p></a>
+                        </div>
+                    </td>
+                </tr>
+                    `
+                })
+                htmls.join('')
+                let HTML= `
+                <tr>
+                    <th><p>STT</p></th>
+                    <th><p>Name</p></th>
+                    <th><p>Description</p></th>
+                    <th><p>Price</p></th>
+                    <th><p>Thumb_url</p></th>
+                    <th><p>Option</p></th>
+                </tr>
+                `+htmls
+                findProductResult.innerHTML= HTML
+            })
+            .catch(function(err){
+                console.log(err)
+            })
+        } else{
+            document.getElementById('product_manager_tab').style.display='block'
+            findProductResult.style.display='none'
+        }
+    })
+    //findNews
+    const findnewsInput = document.getElementById('findnews_input')
+    const findnewsResult = document.getElementById('findnews_result')
+    findnewsResult.style.display='none'
+    findnewsInput.addEventListener('input', async function(e){
+        if(e.target.value){
+            document.getElementById('news_manager_tab').style.display='none'
+            findnewsResult.style.display='block'
+            await fetch('http://localhost:3000/quantri/api/findNews/'+ e.target.value)
+            .then(res=> res.json())
+            .then(datas=>{
+                let htmls= datas.map((item,index)=>{
+                    return `
+                    <tr>
+                    <td><p>${index}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto">${item.tittle}</p></td>
+                    <td><p style="margin:auto; width:200px; overflow:auto; height:300px">${item.time}</p></td>
+                    <td>
+                        <div style="width:100px; display: flex; justify-content:center">
+                            <a ><p style="color:green">Sửa</p></a>
+                            <a ><p style="margin-left: 5%; color:red">Xóa</p></a>
+                        </div>
+                    </td>
+                </tr>
+                    `
+                })
+                htmls.join('')
+                let HTML= `
+                <tr>
+                    <th><p>STT</p></th>
+                    <th><p>Tittle</p></th>
+                    <th><p>Time</p></th>
+                    <th><p>Option</p></th>
+                </tr>
+                `+htmls
+                findnewsResult.innerHTML= HTML
+            })
+            .catch(function(err){
+                console.log(err)
+            })
+        } else{
+            document.getElementById('news_manager_tab').style.display='block'
+            findnewsResult.style.display='none'
+        }
+    })
+</script>
+{{> footer}}

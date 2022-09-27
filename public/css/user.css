@@ -1,0 +1,40 @@
+.prof_container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.user {
+    width: 80%;
+}
+
+.user_prof {
+    width: 100%;
+    margin-top: 2%;
+    border-top: 1px solid rgba(0, 0, 0, .3);
+    border-bottom: 1px solid rgba(0, 0, 0, .3);
+}
+
+.user_info {
+    color: darkorange;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 20px;
+    font-size: 20px;
+}
+
+.btn-update-info {
+    color: darkorange;
+    position: absolute;
+    right: 10%
+}
+
+.btn-update-info:hover {
+    cursor: pointer;
+    color: cornflowerblue;
+}
+
+.hide_info {
+    display: none;
+}

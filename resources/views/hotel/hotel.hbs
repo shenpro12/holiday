@@ -1,0 +1,117 @@
+{{> header account=user.status id=user.userid name=user.username admin=user.admin}}
+ 
+<div class="header-space"></div>
+
+<div class="tour-container">
+
+   <div class="grid wide">
+      <div class="row">
+          <div class="col l-3 m-3 c-12 tour-catalog">
+              <div style="width: 100%; text-align:left">
+                  <h2>Loại hình</h2>
+                  <div class="is-divider"></div>
+                  <ul>
+                      <a href="/hotel/page-1"><li class="catalog-item"><p>Tất cả</p></li></a>
+                      <a href="/hotel/page-1/?type=homestay"><li class="catalog-item"><p>>HomeStay</p></li></a>
+                      <a href="/hotel/page-1/?type=hostel"><li class="catalog-item"><p>>Nhà nghỉ</p></li></a>
+                      <a href="/hotel/page-1/?type=hotel"><li class="catalog-item"><p>>Khách sạn</p></li></a>
+                  </ul>
+              </div>
+
+              <div style="width: 100%; text-align:left; margin-top: 10%">
+                  <h2>Tìm kiếm khách sạn</h2>
+                  <div class="is-divider"></div>
+                  <input id="search_input" style="padding: 15px; background-color:white; border: 1px solid rgb(87, 87, 87); width:100%" placeholder="Nhập từ khóa muốn tìm..."/>
+                  <ul class="search_item">
+                      <div id="search_item_content">
+                          
+                      </div>
+                  </ul>
+              </div>
+
+          </div>
+
+          <div class="col l-9 m-9 c-12">
+               <div class="row">
+                 {{#each items}}
+                    <div class="col l-4 m-4 c-6 tour-item" >
+                        <div style="width:100%; height:350px;">
+                            <div style="width:100%; height:40%;">
+                                <a href="/hotel/{{this.name}}?id={{this._id}}"><img src="http://drive.google.com/uc?export=view&id={{this.thumb_url}}" style="width: 100%; height:100%;border-top-left-radius: 5px;border-top-right-radius: 5px;" /></a>
+                            </div>
+                            <div class="tour-item-item" style="width:100%; height:60%;box-shadow: 0 0 4px rgba(0, 0, 0, 0.3); position:relative; text-align:center">
+                                <a href="/hotel/{{this.name}}?id={{this._id}}">
+                                   <p style="color:black; margin:0% 1%; padding-top:10%; font-weight:bold">{{this.name}}</p>
+                                </a>
+                               
+                               <a href="/hotel/{{this.name}}?id={{this._id}}">
+                                  <p style="display:inline-block;  color: black; text-align:center; font-style:italic; margin-top:5%; font-size:12px; color:rgba(0, 0, 0, 0.6)">Xem chi tiết...</p>
+                               </a>
+                            </div>
+                        </div>
+                                
+                     
+                    </div>
+                  {{/each}}  
+               </div>
+
+               <div  class="page-button" >  
+               {{#if pagePre}}
+                  <a href="/hotel/page-{{pagePreNumber}}"><i class="ti-arrow-circle-left"></i></a>
+               {{/if}}
+               
+               {{#if pageNext}}
+               <a href="/hotel/page-{{pageNextNumber}}"><i class="ti-arrow-circle-right"></i></a>
+               {{/if}} 
+               </div>
+               
+
+            </div>
+       </div>
+
+    </div>
+
+
+</div>
+<script>
+    let li=document.getElementsByClassName('catalog-item')
+    const a={{catalogActive}}0
+    
+    if(a==0){
+       li[0].classList.add('tour-catalog-active')
+    } else {
+        li[a/10].classList.add('tour-catalog-active')        
+    }
+    //
+  const searchItemContent= document.getElementById('search_item_content')
+  const searchInput= document.getElementById('search_input')
+
+  searchInput.addEventListener('input',async function (e) {
+      function removeAllChildNodes(parent) {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+      }
+      removeAllChildNodes(searchItemContent);
+      if(e.target.value!=''){
+          await fetch('http://localhost:3000/hotel/api/search/'+ e.target.value)
+                   .then(function(res){
+                        return res.json()
+                    })
+                   .then(function(datas){
+                        let htmls = datas.map(function(data){
+                            let tempStr=data.name.toUpperCase()
+                            let new_tempStr=tempStr.replace(e.target.value.toUpperCase(), `<span style="color:darkorange">${e.target.value.toUpperCase()}</span>`)
+                        return `<a href="/hotel/${data.name}?id=${data._id}"><li>${new_tempStr}</li></a>`
+                        })
+                        let html = htmls.join('')
+                        searchItemContent.innerHTML=html
+                    })
+                    .catch(function(err){
+                        console.log(err)
+                    })
+        }
+    }
+  )
+</script>
+{{> footer}}

@@ -1,0 +1,16 @@
+{{> header account=user.status id=user.userid name=user.username admin=user.admin}}
+<div class="header-space"></div>
+<div style="width:100%; display:flex; justify-content:center; margin-top:3%">
+    <div style="width:40%;">
+        <form action="/quantri/updatespecialDish/{{specialDishData._id}}" method="post" class="addEatingSpot_Form">
+            <h2 style="color:darkorange">Cập nhật ăn đặc sản</h2>
+            <p>Name:</p>
+            <input value="{{specialDishData.name}}" name="name" placeholder="Nhập tên món ăn..."/>
+            <p>Thumb_url:</p>
+            <input value="{{specialDishData.thumb_url}}" name="thumb_url" placeholder="ID ảnh..."/>
+            <button type="submit">Cập nhật</button>
+        </form>
+    </div>
+
+</div>
+{{> footer}}

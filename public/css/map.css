@@ -1,0 +1,88 @@
+#map {
+    height: calc(100vh - 90px);
+    width: 100%;
+    z-index: 1;
+    position: absolute;
+    margin-top: 90px;
+}
+
+.mapContainer {
+    width: 100%;
+    height: 100vh;
+}
+
+.leaflet-control-attribution {
+    display: none;
+}
+
+.leaflet-control {
+    text-align: left;
+    align-items: left;
+}
+
+.leaflet-control-layers-base label,
+.leaflet-control-layers-overlays label {
+    color: black;
+    margin: 0px;
+    width: 170px;
+}
+
+.leaflet-control-layers-base label>span>input,
+.leaflet-control-layers-overlays label>span>input {
+    display: inline;
+    margin: 0px 15px;
+    padding: 0px;
+    width: auto;
+}
+
+@media (max-width:720px) {
+    #map {
+        padding-bottom: 90%;
+    }
+}
+
+@media (max-width:480px) {
+    #map {
+        padding-bottom: 140%;
+    }
+}
+
+.leaflet-locationiq-input {
+    margin: 0px;
+}
+
+.leaflet-sidebar .close {
+    background: none !important;
+    color: black !important;
+    margin: 0px;
+    position: absolute !important;
+}
+
+.leaflet-routing-geocoder>input {
+    margin: 0px;
+}
+
+.leaflet-routing-geocoder>input {
+    margin: 0px;
+    background-color: white;
+    padding: 15px
+}
+
+.leaflet-routing-add-waypoint {
+    width: 50px;
+    background-color: darkorange !important;
+}
+
+.leaflet-control-geocoder-icon,
+.leaflet-control-geocoder-form>input {
+    margin: 0px;
+}
+
+.leaflet-sidebar>.leaflet-control {
+    background-color: rgba(201, 201, 201, 0.7) !important;
+    border: none !important;
+}
+
+.leaflet-sidebar>.leaflet-control::-webkit-scrollbar {
+    display: none;
+}

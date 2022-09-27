@@ -1,0 +1,297 @@
+.Detail-container {
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+.Detail-container .container {
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    padding-bottom: 2% !important;
+}
+
+.header-space {
+    background-color: #bf7500;
+    width: 100%;
+    height: 100px;
+}
+
+.route {
+    margin-left: 5%;
+    margin-bottom: 5%;
+    font-style: italic;
+}
+
+.route a {
+    text-decoration: none;
+    color: black;
+}
+
+.route a:hover {
+    color: darkorange;
+}
+
+.detail-img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.col .description {
+    margin: 5% 0%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 6;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.col .price {
+    color: #1196dd;
+}
+
+.is-divider {
+    height: 3px;
+    display: block;
+    background-color: rgba(0, 0, 0, .1);
+    width: 100%;
+    max-width: 40px;
+    margin: 1em 0 1em;
+}
+
+.button-booking {
+    background-color: #e30050;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 23px;
+    border-radius: 5px;
+    font-weight: bolder;
+    transition: .5s ease;
+    margin: 0px;
+}
+
+.button-booking:hover {
+    cursor: pointer;
+    background-color: #1196dd;
+}
+
+.products-tab-container {
+    margin-top: 5%;
+    width: 100%;
+    text-align: center;
+}
+
+.products-tab {
+    text-align: left;
+    width: 80%;
+    margin: auto;
+}
+
+.products-tab-item {
+    border: 2px solid rgba(0, 0, 0, .1);
+    padding: 15px 20px;
+    background-color: rgba(0, 0, 0, .1);
+    color: rgba(0, 0, 0, .6);
+    font-weight: bold;
+    font-size: .8em;
+    list-style: none;
+    display: inline-block;
+    margin-top: 1%
+}
+
+.products-tab-item:hover {
+    color: black;
+    cursor: pointer;
+}
+
+.products-tab-item-active {
+    border-top: 2px solid #ff9c00;
+    background-color: white;
+    color: black;
+}
+
+.products-tab-content {
+    width: 100%;
+    margin-top: .3%;
+}
+
+.products-tab-content-description {
+    width: 100%;
+    margin-top: .1%;
+    margin: auto;
+    border: 2px solid rgba(0, 0, 0, .1);
+    display: none;
+}
+
+.products-tab-content-info {
+    width: 100%;
+    margin-top: .1%;
+    margin: auto;
+    display: none;
+    border: 2px solid rgba(0, 0, 0, .1);
+}
+
+.products-tab-content-image,
+.products-tab-content-rate {
+    width: 100%;
+    margin-top: .1%;
+    margin: auto;
+    display: none;
+    border: 2px solid rgba(0, 0, 0, .1);
+    text-align: center;
+}
+
+.product-content-active {
+    display: block;
+}
+
+.info {
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+.info>p>b {
+    margin-left: 2%;
+}
+
+.info-content {
+    margin-left: 10%;
+}
+
+@media (max-width:400px) {
+    .products-tab-item {
+        display: block;
+    }
+}
+
+.send_comment {
+    width: 100px;
+    margin-top: 10px;
+    display: none;
+    margin-right: -10px;
+}
+
+.send_comment:hover {
+    display: block;
+}
+
+.products-tab-content-item>div>form>textarea:focus~.send_comment {
+    display: block;
+}
+
+.rep-comment-btn {
+    margin-top: 10%;
+    width: 100%;
+    height: 40%;
+    background-color: darkorange;
+    border-radius: 10%;
+    color: white;
+    font-size: 12px;
+    transition: 1s ease;
+}
+
+.rep-comment-btn:hover {
+    cursor: pointer;
+    background-color: deeppink;
+}
+
+.rep-form {
+    width: 100%;
+    display: none
+}
+
+.comment-container {
+    text-align: left;
+    width: 100%;
+    display: flex;
+    margin-bottom: 1%;
+    margin-top: 1%;
+    margin-left: 2%;
+}
+
+.comment-container:hover>div>.report-comment-btn,
+.comment-container:hover>div>.delete-comment-btn {
+    display: inline-block;
+}
+
+.report-comment-btn:hover>p,
+.delete-comment-btn:hover>p {
+    cursor: pointer;
+    color: darkorange !important;
+}
+
+.comment-time {
+    display: inline-block;
+    font-size: 13px;
+    font-style: italic;
+    margin: 0px;
+    color: rgb(116, 109, 109)
+}
+
+.report-comment-btn,
+.delete-comment-btn {
+    display: none;
+    margin-left: 1%;
+    text-decoration: none;
+}
+
+.bookform {
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    transition: .1s ease;
+}
+
+.bookform>form {
+    width: 0px;
+    background-color: white;
+    margin: auto;
+    z-index: 21;
+    box-shadow: 5px 5px 13px rgb(87, 87, 87);
+    transition: .2s ease;
+    overflow: hidden;
+}
+
+.bookform>form>.grid>.row>.col>div>p {
+    font-weight: bold;
+}
+
+.bookform>form>.grid>.row>.col>div>input {
+    width: 100%;
+    margin: 0px;
+    background-color: white;
+    padding: 15px;
+    border: 1px solid rgb(87, 87, 87);
+}
+
+.bookform>.booking_overlay {
+    margin: 0px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    z-index: -1;
+}
+
+.bookform>.booking_overlay:hover {
+    cursor: context-menu;
+}
+
+.show_hide-bookform:checked~.bookform {
+    opacity: 1;
+    z-index: 21;
+}
+
+.show_hide-bookform:checked~.bookform>form {
+    width: 90%;
+}
+
+.show_hide-bookform {
+    display: none;
+}

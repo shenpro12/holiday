@@ -1,0 +1,108 @@
+{{> header account=login.status id=login.userid name=login.username admin=user.admin}}
+<div class="header-space"></div>
+<div class="prof_container">
+    <div class="user">
+        <h2 style="color: darkorange;">Cài Đặt tài khoản chung</h2>
+        <div class="user_prof">
+            <p class="btn-update-info" id="btn-update-info">cập nhật</p>
+            <p style="color: darkorange; font-size:20px">User name: <b style="color: black;">{{user.username}}</b></p>
+            {{#if status}}
+            <p style="color: darkorange; font-size:15px">{{status}}</p>
+            {{/if}}
+            {{#if changePassword}}
+            <p style="color: darkorange; font-size:15px">{{changePassword}}</p>
+            {{/if}}
+            <table id="info_main">
+                <tr>
+                    <td><p class="user_info">Họ tên:</p></td>
+                    <td><p style="font-weight:bold ;">{{user.name}}</p></td>
+                </tr>
+                <tr>
+                    <td><p class="user_info">Giới tính:</p></td>
+                    <td><p style="font-weight:bold ;">{{user.male}}</p></td>
+                </tr>
+                <tr>
+                    <td><p class="user_info">Ngày sinh:</p></td>
+                    <td><p style="font-weight:bold ;">{{user.bird}}</p></td>
+                </tr>
+                <tr>
+                    <td><p class="user_info">Địa chỉ:</p></td>
+                    <td><p style="font-weight:bold ;">{{user.location}}</p></td>
+                </tr>
+                <tr>
+                    <td><p class="user_info">Nghề nghiệp:</p></td>
+                    <td><p style="font-weight:bold ;">{{user.work}}</p></td>
+                </tr>
+                <tr>
+                    <td><p class="user_info">Email:</p></td>
+                    {{#if user.mail}}
+                    <td><p style="font-weight:bold">{{user.mail}}</p></td>
+                    <td><a style="text-decoration:none" href="/taikhoan/prof/changeEmail"><p style="color:rgb(75, 108, 239) ; font-size:12px; font-style:italic">Thay đổi</p></a></td>
+                    {{else}}
+                    <td><a style="text-decoration:none" href="/taikhoan/prof/bindEmail"><p style="color:rgb(75, 108, 239) ; font-size:12px; font-style:italic">Thêm Email</p></a></td>
+                    {{/if}}
+                </tr>
+            </table>
+
+            <form class="info_form hide_info" id="info_form" method="post" action="/taikhoan/prof/{{login.userid}}/update">
+                <table >
+                <tr>
+                    <td><p class="user_info">Họ tên:</p></td>
+                    <td><input value="{{user.name}}" name="name" style="width: 100%;"/></td>
+                </tr>
+                <tr>
+                    <td><p class="user_info">Giới tính:</p></td>
+                    <td><input value="{{user.male}}" name="male" style="width: 100%;" /></td>
+                </tr>
+                <tr>
+                    <td><p class="user_info">Ngày sinh:</p></td>
+                    <td><input value="{{user.bird}}" name="bird" style="width: 100%;" /></td>
+                </tr>
+                <tr>
+                    <td><p class="user_info">Địa chỉ:</p></td>
+                    <td><input value="{{user.location}}" name="location" style="width: 100%;" /></td>
+                </tr>
+                <tr>
+                    <td><p class="user_info">Nghề nghiệp:</p></td>
+                    <td><input value="{{user.work}}" name="work" style="width: 100%;" /></td>
+                </tr>
+                <tr>
+                    <td><p style="font-weight:bold; color: darkorange;font-size: 25px;margin-right: 20px;margin-bottom: 15px;margin-top: 15px;">Thay đổi mật khẩu</p></td>
+                </tr>
+                <tr>
+                    <td><p class="user_info">Mật khẩu cũ:</p></td>
+                    <td><input type="password" name="oldPassword" style="width: 100%;" /></td>
+                </tr>
+                <tr>
+                    <td><p class="user_info">Mật khẩu mới:</p></td>
+                    <td><input type="password" name="newPassword" style="width: 100%;" /></td>
+                </tr>
+                <tr>
+                    <td><p class="user_info">Nhập lại Mật khẩu:</p></td>
+                    <td><input type="password" name="re_newPassword" style="width: 100%;" /></td>
+                </tr>
+            </table>
+            <button type="submit">Cập nhật</button>
+            </form>
+            <p style="font-weight:bold; color: darkorange;font-size: 15px;margin-right: 20px;margin-bottom: 15px;margin-top: 15px;">Lưu ý: Hãy đảm bảo rằng bạn đã nhập đúng Email và Email còn sử dụng được. Nếu không bạn sẽ không thể lấy lại mật khẩu khi quên!</p>  
+        </div>
+    </div>
+</div>
+<script>
+    const infoForm=document.getElementById('info_form')
+    const infomain=document.getElementById('info_main')
+    const btnUpdateInfo=document.getElementById('btn-update-info')
+    btnUpdateInfo.onclick=function (){
+        if(infoForm.classList.contains('hide_info')){
+            infoForm.classList.remove('hide_info')
+            infomain.classList.add('hide_info')
+            btnUpdateInfo.innerText='Hủy'
+        } else {
+            infoForm.classList.add('hide_info')
+            infomain.classList.remove('hide_info')
+            btnUpdateInfo.innerText='cập nhật'
+        }
+    }
+</script>
+{{> footer}}
+

@@ -1,0 +1,102 @@
+{{> header }}
+
+<div class="header-space"></div>
+
+<div class="grid wide">
+    <div class="row">
+
+        <div class="col l-6 m-6 c-12">
+            
+            <div style="display: flex; justify-content: center; align-items: center; margin-top:5%">
+    <div class="main">
+        <div style="text-align: center; margin-top:2%; position:absolute; width:100%; color:darkorange">
+            <h3>Chào mừng quý khách!</h3>
+        </div>
+        
+        <input type="checkbox" id="chk" aria-hidden="true">
+
+        <div class="signup">
+          <form method="post" action="/taikhoan/dangky">
+            <label for="chk" aria-hidden="true" style="color:darkorange; margin-top:50px; margin-bottom:45px; ">Đăng ký</label>
+            {{#if signup_status}}
+            <p style="color:darkorange">{{signup_status}}</p>
+            {{/if}}
+            {{#if signup_successmess}}
+            <p style="color:darkorange">{{signup_successmess}}</p>
+            {{/if}}
+            <input type="text" name="txt" placeholder="User name" required="" value="{{signup_username}}">
+            <input type="password" name="new_password" placeholder="Mật khẩu" required="">
+            <input type="password" name="re_password" placeholder="Nhập lại mật khẩu" required="">
+            <button type="submit">Sign up</button>
+          </form>
+        </div>
+
+        <div class="login-form">
+          <form method="post" action="/taikhoan/dangnhap">
+            <label for="chk" aria-hidden="true">Đăng nhập</label> 
+            {{#if login_status}}
+            <p style="color:darkorange">{{login_status}}</p>
+            {{/if}}
+            <input type="text" name="username" placeholder="User name" required="" value="{{login_username}}">
+            <input type="password" name="pswd" placeholder="Mật khẩu" required="">
+            <button type="submit">Login</button> 
+            <a href="/taikhoan/matkhau" style="text-decoration: none;"><p class="forgotPassword-btn">Quên mật khẩu?</p></a>
+          </form>
+        </div>
+  </div>
+</div>
+
+        </div>
+
+        <div class="col l-6 m-6 c-12" style="margin-top: 3%"> 
+            <h1 style="margin-top:3%">TIN TỨC</h1>
+            <div style="width: 100%; text-align:left; margin-top: 5%">
+                  <h2>Bài viết mới nhất</h2>
+                  <div class="is-divider"></div>
+                  {{#each new_news}}
+                    <a href="/news/{{this._id}}"><p class="new_news_item" style="font-size: 20px;">{{this.tittle}}</p></a>
+                  {{/each}}
+            </div>
+
+                <div style="width:100%; text-align:center; position:relative; margin-top:5%; text-align:left;">
+                    <h2 style="margin-bottom:3%">Tìm bài viết</h2>
+                    <input id="search_input" style="border-radius:0px; margin:0px; padding: 15px; background-color:white; border: 1px solid rgb(87, 87, 87); width:100%" placeholder="Nhập từ khóa muốn tìm..."/>
+                    <div class="search_result" id="search_result"></div>
+                </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    const searchResult= document.getElementById('search_result')
+  const searchInput= document.getElementById('search_input')
+
+  searchInput.addEventListener('input',async function (e) {
+      function removeAllChildNodes(parent) {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+      }
+      removeAllChildNodes(searchResult);
+      if(e.target.value!=''){
+          await fetch('http://localhost:3000/news/api/searchNews/'+ e.target.value)
+                   .then(function(res){
+                        return res.json()
+                    })
+                   .then(function(datas){
+                        let htmls = datas.map(function(data){
+                            let tempStr=data.tittle.toUpperCase()
+                            let new_tempStr=tempStr.replace(e.target.value.toUpperCase(), `<span style="color:darkorange">${e.target.value.toUpperCase()}</span>`)
+                        return `<a href="/news/${data._id}"><p class="new_news_item" style="font-size:15px">${new_tempStr}</p></a>`
+                        })
+                        let html = htmls.join('')
+                        searchResult.innerHTML=html
+                    })
+                    .catch(function(err){
+                        console.log(err)
+                    })
+        }
+    }
+  )
+</script>
+{{> footer}}

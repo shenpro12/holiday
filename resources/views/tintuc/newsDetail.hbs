@@ -1,0 +1,176 @@
+{{> header account=user.status id=user.userid name=user.username admin=user.admin}}
+
+
+
+<div class="header-space"></div>
+
+<div class="news_container">
+    <p class="route" style="margin-bottom: 3%; margin-left:1%"><a href="/news/page-1">Tin tức</a> / <a href="/news/{{newsData._id}}">{{newsData.tittle}}</a></p>
+    <div class="grid wide">
+        <div class="row">
+            <div class="col l-9 m-9 c-12" style="box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);">
+                <h2 style="text-align: left; margin-top:4%">{{newsData.tittle}}</h2>
+                <p style="text-align:left; font-size: 16px; font-style: italic; margin: 1% 0px; color: rgb(116, 109, 109)">{{newsData.time}}</p>
+                <div class="is-divider"></div>
+                <img src="http://drive.google.com/uc?export=view&id={{newsData.thumb_url}}" style="width:100%"/>
+                <div>
+                    {{#each newsData.content}}
+                    <h3 style="text-align: left; margin-top:2%">{{this.tittle}}</h3>
+                    <p style="text-align: justify; margin-top:1%; margin-left: 1%">{{this.content}}</p>
+                    {{#if this.images}}<img src="http://drive.google.com/uc?export=view&id={{this.images}}" style="width:80%; height:60%"/>{{/if}}
+                    {{/each}}
+                </div>
+            </div>
+            <div class="col l-3 m-3 c-12">
+                
+                <div style="width: 100%; text-align:left; margin-top: 10%">
+                  <h3>Bài viết mới nhất</h3>
+                  <div class="is-divider"></div>
+                  {{#each new_news}}
+                    <a href="/news/{{this._id}}"><p class="new_news_item">{{this.tittle}}</p></a>
+                  {{/each}}
+                </div>
+
+                <div style="width:100%; text-align:center; position:relative; margin-top:5%; text-align:left;">
+                    <h3 style="margin-bottom:3%">Tìm bài viết</h3>
+                    <input id="search_input" style="border-radius:0px; margin:0px; padding: 15px; background-color:white; border: 1px solid rgb(87, 87, 87); width:100%" placeholder="Nhập từ khóa muốn tìm..."/>
+                    <div class="search_result" id="search_result"></div> 
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+<div class="products-tab-container">
+    <div class="products-tab">
+
+        <ul>
+            <li id="products-tab-item" class="products-tab-item products-tab-item-active">ĐÁNH GIÁ{{totalComment}}</li>
+        </ul> 
+
+        <div class="products-tab-content">
+            <div class="products-tab-content-item products-tab-content-rate product-content-active">
+                {{#if user}}
+                <div style="text-align:left ; width:100%; display:flex; margin-bottom: 1%; margin-top:1%; margin-left: 2%;">
+                    <div style="text-align:center; background-color:rgb(63, 152, 152); width:40px; height:40px; border-radius:100%; overflow:hidden">
+                        <p class="user-textName" style="line-height:40px; margin:0px; text-transform: uppercase; color:white; font-size:30px; font-weight:bold">{{user.username}}</p>
+                    </div>
+                    <form style="width: 80%" method="post" action="/comment/{{newsData._id}}">
+                        <textarea  style="margin-left: 2%; width:100%; padding:5px" name="Comment" placeholder="Viết đánh giá" ></textarea>
+                        <button class="send_comment" type="submit">Gửi</button>
+                    </form>
+                </div>
+                {{else}}
+                <div style="text-align:left ; width:100%; display:flex; margin-bottom: 1%; margin-top:1%; margin-left: 2%;">
+                    <div style="width:80%; margin-left:2%">
+                    <p style="color:darkorange; margin-top:1%; font-size:16px; word-wrap: break-word">Bạn chưa đăng nhập! Hãy <a style="color:orangered" href="/taikhoan/dangnhap">đăng nhập</a> để viết đánh giá!</p>
+                    </div>
+                </div>
+                {{/if}}
+                {{#each commentsData}}
+                <div class="comment-container">
+                    
+                    <div style="text-align:center; background-color:rgb(67, 239, 90); width:40px; height:40px; border-radius:100%">
+                        <p class="user-textName" style="line-height:40px; margin:0px; text-transform: uppercase; color:white; font-size:30px; font-weight:bold">{{this.username}}</p>
+                        <div class="rep-comment-btn">Trả lời</div>
+                    </div>
+                    <div style="width:80%; margin-left:2%; border-bottom:1px solid rgb(116, 109, 109)">
+                       <p style="font-weight: bold; margin:0px; font-size:16px;word-wrap: break-word; margin-top:1%">{{this.username}}</p>
+                       <p class="comment-time">{{this.time}}</p>
+                       <a href="/comment/{{this.id}}/report" class="report-comment-btn"><p style="margin:0px; font-style:italic; font-size:12px; color:red">Báo vi phạm</p></a>
+                       {{#if this.selft}}
+                       <a href="/comment/{{this.id}}/delete" class="delete-comment-btn"><p style="margin:0px; font-style:italic; font-size:12px; color:red">Xóa</p></a>
+                       {{/if}}
+                       <p style="margin-top:1%; font-size:16px; word-wrap: break-word">{{this.content}}</p>
+                       <form class="rep-form" method="post" action="/comment/{{this.id}}">
+                           <textarea name="rep_comment" style="margin-bottom:0%; width:90%; padding:5px; margin-left:5%" placeholder="Viết trả lời"></textarea>
+                           <button type="submit" style="font-size:10px; width: 70px;height:30px; margin-top:1%">Gửi</button>
+                       </form>
+
+                       {{#each this.rep_comments}}
+                       <div class="comment-container">
+                           <div style="text-align:center; background-color:rgb(67, 239, 90); width:40px; height:40px; border-radius:100%">
+                              <p class="user-textName" style="line-height:40px; margin:0px; text-transform: uppercase; color:white; font-size:30px; font-weight:bold">{{this.username}}</p>
+                           </div>
+
+                           <div style="width:80%; margin-left:2%;">
+                              <p style="font-weight: bold; margin:0px; font-size:16px;word-wrap: break-word; margin-top:1%">{{this.username}}</p>
+                              <p class="comment-time">{{this.time}}</p>
+                              <a href="/comment/{{this.id}}/report" class="report-comment-btn"><p style="margin:0px; font-style:italic; font-size:12px; color:red">Báo vi phạm</p></a>
+                              {{#if this.selft}}
+                              <a href="/comment/{{this.id}}/delete" class="delete-comment-btn"><p style="margin:0px; font-style:italic; font-size:12px; color:red">Xóa</p></a>
+                              {{/if}}
+                              <p style="margin-top:1%; font-size:16px; word-wrap: break-word">{{this.content}}</p>
+                           </div>
+                        </div>                       
+                       {{/each}}
+
+                    </div>
+                    
+                </div>
+                {{/each}}
+            </div>
+            
+        </div>
+
+    </div>  
+</div>
+
+
+
+</div>
+<script>
+    const searchResult= document.getElementById('search_result')
+  const searchInput= document.getElementById('search_input')
+
+  searchInput.addEventListener('input',async function (e) {
+      function removeAllChildNodes(parent) {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+      }
+      removeAllChildNodes(searchResult);
+      if(e.target.value!=''){
+          await fetch('http://localhost:3000/news/api/searchNews/'+ e.target.value)
+                   .then(function(res){
+                        return res.json()
+                    })
+                   .then(function(datas){
+                        let htmls = datas.map(function(data){
+                            let tempStr=data.tittle.toUpperCase()
+                            let new_tempStr=tempStr.replace(e.target.value.toUpperCase(), `<span style="color:darkorange">${e.target.value.toUpperCase()}</span>`)
+                        return `<a href="/news/${data._id}"><p class="new_news_item" style="font-size:15px">${new_tempStr}</p></a>`
+                        })
+                        let html = htmls.join('')
+                        searchResult.innerHTML=html
+                    })
+                    .catch(function(err){
+                        console.log(err)
+                    })
+        }
+    }
+  )
+  //
+  var userTextName = document.getElementsByClassName("user-textName");
+    for (let item of userTextName) {
+        let name = item.innerText.slice(0, 1)
+        item.innerText = name;
+    }
+    //
+    const repBtn=document.getElementsByClassName('rep-comment-btn')
+    const repForm=document.getElementsByClassName('rep-form')
+    for(let i=0; i< repBtn.length;i++){
+        repBtn[i].onclick=(e)=>{
+            if(repBtn[i].innerText=='Hủy'){
+                repForm[i].style.display='none'
+                repBtn[i].innerText='Trả lời'
+                return
+            }
+            repForm[i].style.display='block'
+            repBtn[i].innerText='Hủy'
+        }
+    }
+</script>
+{{> footer}}
