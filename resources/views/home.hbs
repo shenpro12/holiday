@@ -21,14 +21,14 @@
   <div class="slideshow slideshow--contrast slideshow--contrast--before">
     <div class="slides">
       {{#each banner}}
-      <div class="slide slide{{this.id}}" style="background-image: linear-gradient(to bottom, rgba(200, 200, 75, 0.25) 0, rgba(200, 75, 75, 0.5) 100%), url(http://drive.google.com/uc?export=view&id={{this.thumb_url}})"></div>
+      <div class="slide slide{{this.id}}" style="background-image: linear-gradient(to bottom, rgba(200, 200, 75, 0.25) 0, rgba(200, 75, 75, 0.5) 100%), url(https://drive.google.com/thumbnail?id={{this.thumb_url}}&sz=w1000)"></div>
       {{/each}}
     </div>
   </div>
   <div class="slideshow slideshow--contrast slideshow--contrast--after">
     <div class="slides">
       {{#each banner}}
-      <div class="slide slide{{this.id}}" style="background-image: linear-gradient(to bottom, rgba(200, 200, 75, 0.25) 0, rgba(200, 75, 75, 0.5) 100%), url(http://drive.google.com/uc?export=view&id={{this.thumb_url}})"></div>
+      <div class="slide slide{{this.id}}" style="background-image: linear-gradient(to bottom, rgba(200, 200, 75, 0.25) 0, rgba(200, 75, 75, 0.5) 100%), url(https://drive.google.com/thumbnail?id={{this.thumb_url}}&sz=w1000)"></div>
       {{/each}}
     </div>
   </div>
@@ -49,7 +49,7 @@
                     <li class="splide__slide">
                       <a href="/diemden/{{this.name}}?id={{this._id}}">
                         <div class="splide-item">
-                          <img src="http://drive.google.com/uc?export=view&id={{this.thumb_url}}" class="item_img" />
+                          <img src="https://drive.google.com/thumbnail?id={{this.thumb_url}}&sz=w1000" class="item_img" />
                           <div class="text">
                             <p class="text-text">{{this.name}}</p>
                           </div>
@@ -75,7 +75,7 @@
                   {{#each tours}}
                     <li class="splide__slide">
                         <div class="splide-item">
-                          <a href="/dichvu/tour/{{this.name}}?id={{this._id}}"><img src="https://lh3.google.com/u/0/d/{{this.thumb_url}}" class="item_img" /></a>
+                          <a href="/dichvu/tour/{{this.name}}?id={{this._id}}"><img src="https://drive.google.com/thumbnail?id={{this.thumb_url}}&sz=w1000" class="item_img" /></a>
                           <div class="tour-text">
                             <div class="tour-content">
                               <a href="/dichvu/tour/{{this.name}}?id={{this._id}}">
@@ -107,7 +107,7 @@
                     <li class="splide__slide">
                       <a href="/diemanuong/{{this.name}}?id={{this._id}}">
                         <div class="splide-item">
-                          <img src="http://drive.google.com/uc?export=view&id={{this.thumb_url}}" class="item_img" />
+                          <img src="https://drive.google.com/thumbnail?id={{this.thumb_url}}&sz=w1000" class="item_img" />
                           <div class="text">
                             <p class="text-text">{{this.name}}</p>
                           </div>
@@ -129,7 +129,7 @@
     {{#each dishs}}
     <div class="col l-3 m-4 c-6 dish_item">
       <div class="itemm">
-        <img src="http://drive.google.com/uc?export=view&id={{this.thumb_url}}" alt="" class="dish_img" />
+        <img src="https://drive.google.com/thumbnail?id={{this.thumb_url}}&sz=w1000" alt="" class="dish_img" />
         <div class="shadow"><p>{{this.name}}</p></div>
       </div>
     </div>
